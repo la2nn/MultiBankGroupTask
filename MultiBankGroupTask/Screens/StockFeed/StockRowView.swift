@@ -11,7 +11,7 @@ struct StockRowView: View {
     let symbol: StockSymbol
 
     var body: some View {
-        HStack {
+        HStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(symbol.id)
                     .font(.headline)
@@ -19,37 +19,56 @@ struct StockRowView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
+            .lineLimit(1)
+            .frame(minWidth: 80, alignment: .leading)
 
             Spacer()
 
             HStack(spacing: 4) {
-                Text("\(symbol.currentPrice)")
+                Text(symbol.formattedPrice)
                     .font(.body.monospacedDigit())
-                priceDirectionView
+                    .foregroundStyle(priceColor)
+                    .contentTransition(.numericText())
+                    .animation(.easeInOut(duration: 0.3), value: symbol.formattedPrice)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+
+                Text(directionArrow)
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundStyle(priceIndicatorColor)
+                    .contentTransition(.interpolate)
+                    .animation(.easeInOut(duration: 0.4), value: symbol.priceDirection)
+                    .frame(width: 16)
             }
         }
         .padding(.vertical, 4)
     }
 }
 
-// MARK: - Subviews
+// MARK: - Helpers
 
 private extension StockRowView {
-    @ViewBuilder
-    var priceDirectionView: some View {
+    var directionArrow: String {
         switch symbol.priceDirection {
-        case .up:
-            Image(systemName: "arrow.up")
-                .foregroundStyle(.green)
-                .font(.caption)
-        case .down:
-            Image(systemName: "arrow.down")
-                .foregroundStyle(.red)
-                .font(.caption)
-        case .none:
-            Image(systemName: "minus")
-                .foregroundStyle(.gray)
-                .font(.caption)
+        case .up: "↑"
+        case .down: "↓"
+        case .none: "–"
+        }
+    }
+
+    var priceColor: Color {
+        switch symbol.priceDirection {
+        case .up: .green
+        case .down: .red
+        case .none: .primary
+        }
+    }
+
+    var priceIndicatorColor: Color {
+        switch symbol.priceDirection {
+        case .up: .green
+        case .down: .red
+        case .none: .gray
         }
     }
 }

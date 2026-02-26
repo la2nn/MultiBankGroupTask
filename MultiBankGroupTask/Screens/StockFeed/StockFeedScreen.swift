@@ -24,6 +24,7 @@ struct StockFeedScreen: View {
             }
         }
         .listStyle(.plain)
+        .animation(.default, value: viewModel.sortedTickers)
         .navigationTitle("Stock Feed")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -40,29 +41,28 @@ struct StockFeedScreen: View {
 
 private extension StockFeedScreen {
     var connectionStatusView: some View {
-        HStack(spacing: 6) {
-            Circle()
-                .fill(statusColor)
-                .frame(width: 10, height: 10)
-            Text(statusText)
-                .font(.caption)
-        }
+        Circle()
+            .fill(statusColor)
+            .frame(width: 10, height: 10)
+            .animation(.easeInOut(duration: 0.3), value: viewModel.feedState)
     }
 
+    @ViewBuilder
     var toggleButton: some View {
-        Button(action: {
-            switch viewModel.feedState {
-            case .disconnected:
-                viewModel.start()
-            case .connected:
-                viewModel.stop()
-            case .connecting:
-                break
+        switch viewModel.feedState {
+        case .disconnected:
+            Button { viewModel.start() } label: {
+                Image(systemName: "play.fill")
+                    .foregroundStyle(.green)
             }
-        }) {
-            Text(buttonTitle)
+        case .connected:
+            Button { viewModel.stop() } label: {
+                Image(systemName: "stop.fill")
+                    .foregroundStyle(.red)
+            }
+        case .connecting:
+            ProgressView()
         }
-        .disabled(viewModel.feedState == .connecting)
     }
 }
 
@@ -74,22 +74,6 @@ private extension StockFeedScreen {
         case .connected: .green
         case .connecting: .gray
         case .disconnected: .red
-        }
-    }
-
-    var statusText: String {
-        switch viewModel.feedState {
-        case .connected: "Connected"
-        case .connecting: "Connecting..."
-        case .disconnected: "Disconnected"
-        }
-    }
-
-    var buttonTitle: String {
-        switch viewModel.feedState {
-        case .connected: "Stop"
-        case .connecting: "Connecting..."
-        case .disconnected: "Start"
         }
     }
 }

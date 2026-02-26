@@ -21,6 +21,7 @@ nonisolated struct StockSymbol: Identifiable, Equatable {
     private(set) var currentPrice: Decimal
     private(set) var previousPrice: Decimal
     private(set) var priceDirection: PriceDirection
+    private(set) var formattedPrice: String
 
     init(id: String, companyName: String, companyDescription: String, currentPrice: Decimal) {
         self.id = id
@@ -29,11 +30,13 @@ nonisolated struct StockSymbol: Identifiable, Equatable {
         self.currentPrice = currentPrice
         self.previousPrice = currentPrice
         self.priceDirection = .none
+        self.formattedPrice = StockSymbol.priceFormatter.string(from: currentPrice as NSDecimalNumber) ?? ""
     }
 
     mutating func applyPriceUpdate(_ message: StockPriceMessage) {
         previousPrice = currentPrice
         currentPrice = message.price
+        formattedPrice = StockSymbol.priceFormatter.string(from: message.price as NSDecimalNumber) ?? ""
         if currentPrice > previousPrice {
             priceDirection = .up
         } else if currentPrice < previousPrice {
@@ -42,6 +45,15 @@ nonisolated struct StockSymbol: Identifiable, Equatable {
             priceDirection = .none
         }
     }
+
+    private static let priceFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = "USD"
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
 }
 
 // MARK: - Mock Data
