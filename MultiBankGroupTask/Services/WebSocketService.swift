@@ -155,5 +155,14 @@ private extension WebSocketService {
         ) {
             onClose?()
         }
+
+        func urlSession(
+            _ session: URLSession,
+            task: URLSessionTask,
+            didCompleteWithError error: Error?
+        ) {
+            guard error != nil else { return }
+            onClose?()
+        }
     }
 }
