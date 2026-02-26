@@ -19,7 +19,16 @@ struct StockFeedScreen: View {
         List {
             ForEach(viewModel.sortedTickers, id: \.self) { ticker in
                 if let symbol = viewModel.tickersDictionary[ticker] {
-                    StockRowView(symbol: symbol)
+                    ZStack {
+                        NavigationLink {
+                            StockDetailScreen(viewModel: viewModel, ticker: ticker)
+                        } label: {
+                            EmptyView()
+                        }
+                        .opacity(0)
+
+                        StockRowView(symbol: symbol)
+                    }
                 }
             }
         }
