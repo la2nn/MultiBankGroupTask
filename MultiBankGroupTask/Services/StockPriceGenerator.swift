@@ -17,9 +17,9 @@ actor StockPriceGenerator: StockPriceGeneratorProtocol {
     private var timerTask: Task<Void, Never>?
     private var prices: [String: Decimal]
 
-    init() {
+    init(tickers: [StockSymbol]) {
         self.prices = Dictionary(
-            uniqueKeysWithValues: StockSymbol.allSymbols.map { ($0.id, $0.currentPrice) }
+            uniqueKeysWithValues: tickers.map { ($0.id, $0.currentPrice) }
         )
     }
 
