@@ -8,18 +8,24 @@
 import Foundation
 import Combine
 
-actor WebSocketService {
-    enum ConnectionState {
-        case connected
-        case disconnected
-    }
+protocol WebSocketServiceProtocol {
+    var stockPricePublisher: AnyPublisher<StockPriceMessage, Never> { get }
+    var connectionStatePublisher: AnyPublisher<ServiceConnectionState, Never> { get }
 
-    private static let stockPriceUrl = "wss://ws.postman-echo.com/raw"
+    func connect() async
+    func disconnect() async
+    func send(_ message: StockPriceMessage) async
+}
+
+actor WebSocketService: WebSocketServiceProtocol {
+
+    private nonisolated static let stockPriceUrl = "wss://ws.postman-echo.com/raw"
 
     nonisolated(unsafe) private let stockPriceSubject = PassthroughSubject<StockPriceMessage, Never>()
-    nonisolated(unsafe) private let connectionStateSubject = CurrentValueSubject<ConnectionState, Never>(.disconnected)
+    nonisolated(unsafe) private let connectionStateSubject = CurrentValueSubject<ServiceConnectionState, Never>(.disconnected)
 
     private var webSocketTask: URLSessionWebSocketTask?
+    private var listeningTask: Task<Void, Never>?
     private let session: URLSession
     private let delegate: WebSocketDelegate
     private let decoder = JSONDecoder()
@@ -31,7 +37,7 @@ actor WebSocketService {
         stockPriceSubject.eraseToAnyPublisher()
     }
 
-    nonisolated var connectionStatePublisher: AnyPublisher<ConnectionState, Never> {
+    nonisolated var connectionStatePublisher: AnyPublisher<ServiceConnectionState, Never> {
         connectionStateSubject.eraseToAnyPublisher()
     }
 
@@ -42,11 +48,11 @@ actor WebSocketService {
         self.delegate = delegate
         self.session = URLSession(configuration: .default, delegate: delegate, delegateQueue: nil)
 
-        delegate.onOpen = { [weak connectionStateSubject] in
-            connectionStateSubject?.send(.connected)
+        delegate.onOpen = { [weak self] in
+            self?.connectionStateSubject.send(.connected)
         }
-        delegate.onClose = { [weak connectionStateSubject] in
-            connectionStateSubject?.send(.disconnected)
+        delegate.onClose = { [weak self] in
+            self?.connectionStateSubject.send(.disconnected)
         }
     }
 
@@ -62,7 +68,7 @@ actor WebSocketService {
 
     func disconnect() {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
-        webSocketTask = nil
+        handleDisconnection()
     }
 
     func send(_ message: StockPriceMessage) async {
@@ -87,7 +93,7 @@ private extension WebSocketService {
     func startListening() {
         guard let webSocketTask else { return }
 
-        Task {
+        listeningTask = Task {
             while !Task.isCancelled {
                 do {
                     let message = try await webSocketTask.receive()
@@ -120,6 +126,8 @@ private extension WebSocketService {
     }
 
     func handleDisconnection() {
+        listeningTask?.cancel()
+        listeningTask = nil
         webSocketTask = nil
     }
 }
