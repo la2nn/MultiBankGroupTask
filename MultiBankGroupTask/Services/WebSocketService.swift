@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol WebSocketServiceProtocol {
+nonisolated protocol WebSocketServiceProtocol: Sendable {
     var stockPricePublisher: AnyPublisher<StockPriceMessage, Never> { get }
     var connectionStatePublisher: AnyPublisher<ServiceConnectionState, Never> { get }
 
