@@ -11,7 +11,16 @@ import SwiftUI
 struct MultiBankGroupTaskApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                StockFeedScreen(viewModel: buildStockFeedViewModel())
+            }
         }
+    }
+
+    private func buildStockFeedViewModel() -> StockFeedViewModel {
+        let tickers = StockSymbol.allSymbols
+        let webSocketService = WebSocketService()
+        let priceGenerator = StockPriceGenerator(tickers: tickers)
+        return StockFeedViewModel(tickers: tickers, webSocketService: webSocketService, priceGenerator: priceGenerator)
     }
 }
