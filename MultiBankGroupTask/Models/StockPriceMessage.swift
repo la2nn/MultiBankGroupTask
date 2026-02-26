@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StockPriceMessage: Codable {
+nonisolated struct StockPriceMessage: Codable {
     let symbol: String
     let price: Decimal
 }
