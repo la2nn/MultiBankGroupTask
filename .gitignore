@@ -29,3 +29,6 @@ Carthage/Build/
 # Playgrounds
 timeline.xctimeline
 playground.xcworkspace
+
+#websocket local echo server
+ws-echo-server/
