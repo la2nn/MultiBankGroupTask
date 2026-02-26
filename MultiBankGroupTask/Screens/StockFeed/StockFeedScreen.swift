@@ -9,20 +9,14 @@ import SwiftUI
 
 struct StockFeedScreen: View {
 
-    @StateObject private var viewModel: StockFeedViewModel
-
-    init(viewModel: StockFeedViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject private var viewModel = StockFeedViewModel.build()
 
     var body: some View {
         List {
             ForEach(viewModel.sortedTickers, id: \.self) { ticker in
                 if let symbol = viewModel.tickersDictionary[ticker] {
                     ZStack {
-                        NavigationLink {
-                            StockDetailScreen(viewModel: viewModel, ticker: ticker)
-                        } label: {
+                        NavigationLink(value: ticker) {
                             EmptyView()
                         }
                         .opacity(0)
@@ -42,6 +36,9 @@ struct StockFeedScreen: View {
             ToolbarItem(placement: .topBarTrailing) {
                 toggleButton
             }
+        }
+        .navigationDestination(for: String.self) { ticker in
+            StockDetailScreen(viewModel: viewModel, ticker: ticker)
         }
     }
 }

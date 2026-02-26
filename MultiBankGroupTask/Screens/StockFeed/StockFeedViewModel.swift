@@ -44,6 +44,17 @@ final class StockFeedViewModel: ObservableObject {
         bindWebSocket()
     }
 
+    static func build() -> StockFeedViewModel {
+        let tickers = StockSymbol.allSymbols
+        let webSocketService = WebSocketService()
+        let priceGenerator = StockPriceGenerator(tickers: tickers)
+        return StockFeedViewModel(
+            tickers: tickers,
+            webSocketService: webSocketService,
+            priceGenerator: priceGenerator
+        )
+    }
+
     func start() {
         startFeed()
     }

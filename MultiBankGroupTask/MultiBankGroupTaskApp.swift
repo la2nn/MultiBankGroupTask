@@ -9,18 +9,33 @@ import SwiftUI
 
 @main
 struct MultiBankGroupTaskApp: App {
+
+    @State private var navigationPath = NavigationPath()
+
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                StockFeedScreen(viewModel: buildStockFeedViewModel())
+            NavigationStack(path: $navigationPath) {
+                StockFeedScreen()
+            }
+            .onOpenURL { url in
+                handleDeepLink(url)
             }
         }
     }
+}
 
-    private func buildStockFeedViewModel() -> StockFeedViewModel {
-        let tickers = StockSymbol.allSymbols
-        let webSocketService = WebSocketService()
-        let priceGenerator = StockPriceGenerator(tickers: tickers)
-        return StockFeedViewModel(tickers: tickers, webSocketService: webSocketService, priceGenerator: priceGenerator)
+// MARK: - Deep Link
+
+private extension MultiBankGroupTaskApp {
+    func handleDeepLink(_ url: URL) {
+        guard url.scheme == "stocks",
+              url.host == "symbol",
+              let ticker = url.pathComponents.dropFirst().first,
+              StockSymbol.allSymbols.contains(where: { $0.id == ticker })
+        else {
+            return
+        }
+        navigationPath = NavigationPath()
+        navigationPath.append(ticker)
     }
 }
