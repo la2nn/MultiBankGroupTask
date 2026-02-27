@@ -33,10 +33,10 @@ nonisolated struct StockSymbol: Identifiable, Equatable {
         self.formattedPrice = StockSymbol.priceFormatter.string(from: currentPrice as NSDecimalNumber) ?? ""
     }
 
-    mutating func applyPriceUpdate(_ message: StockPriceMessage) {
+    mutating func applyPriceUpdate(_ newPrice: Decimal) {
         previousPrice = currentPrice
-        currentPrice = message.price
-        formattedPrice = StockSymbol.priceFormatter.string(from: message.price as NSDecimalNumber) ?? ""
+        currentPrice = newPrice
+        formattedPrice = StockSymbol.priceFormatter.string(from: newPrice as NSDecimalNumber) ?? ""
         if currentPrice > previousPrice {
             priceDirection = .up
         } else if currentPrice < previousPrice {

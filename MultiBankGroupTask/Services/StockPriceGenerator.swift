@@ -16,11 +16,13 @@ actor StockPriceGenerator: StockPriceGeneratorProtocol {
 
     private var timerTask: Task<Void, Never>?
     private var prices: [String: Decimal]
+    private let interval: Duration
 
-    init(tickers: [StockSymbol]) {
+    init(tickers: [StockSymbol], interval: Duration = .seconds(2)) {
         self.prices = Dictionary(
             uniqueKeysWithValues: tickers.map { ($0.id, $0.currentPrice) }
         )
+        self.interval = interval
     }
 
     func startEmitting(to service: WebSocketServiceProtocol) async {
@@ -33,7 +35,7 @@ actor StockPriceGenerator: StockPriceGeneratorProtocol {
                     let message = StockPriceMessage(symbol: symbol, price: newPrice)
                     await service.send(message)
                 }
-                try? await Task.sleep(for: .seconds(2))
+                try? await Task.sleep(for: interval)
             }
         }
     }

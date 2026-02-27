@@ -119,7 +119,7 @@ private extension StockFeedViewModel {
         }
 
         // O(1) — update price in dictionary
-        symbol.applyPriceUpdate(message)
+        symbol.applyPriceUpdate(message.price)
         tickersDictionary[ticker] = symbol
 
         let newPrice = symbol.currentPrice

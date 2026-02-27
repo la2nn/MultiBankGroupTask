@@ -6,7 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		0148148D2F50EA5E00F4CE39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0171710B2F50726900940940 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 017171122F50726900940940;
+			remoteInfo = MultiBankGroupTask;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		014814892F50EA5E00F4CE39 /* MultiBankGroupTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiBankGroupTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		017171132F50726900940940 /* MultiBankGroupTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiBankGroupTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -21,6 +32,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		0148148A2F50EA5E00F4CE39 /* MultiBankGroupTaskTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MultiBankGroupTaskTests;
+			sourceTree = "<group>";
+		};
 		017171152F50726900940940 /* MultiBankGroupTask */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,6 +48,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		014814862F50EA5E00F4CE39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		017171102F50726900940940 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				017171152F50726900940940 /* MultiBankGroupTask */,
+				0148148A2F50EA5E00F4CE39 /* MultiBankGroupTaskTests */,
 				017171142F50726900940940 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				017171132F50726900940940 /* MultiBankGroupTask.app */,
+				014814892F50EA5E00F4CE39 /* MultiBankGroupTaskTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +86,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		014814882F50EA5E00F4CE39 /* MultiBankGroupTaskTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0148148F2F50EA5E00F4CE39 /* Build configuration list for PBXNativeTarget "MultiBankGroupTaskTests" */;
+			buildPhases = (
+				014814852F50EA5E00F4CE39 /* Sources */,
+				014814862F50EA5E00F4CE39 /* Frameworks */,
+				014814872F50EA5E00F4CE39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0148148E2F50EA5E00F4CE39 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0148148A2F50EA5E00F4CE39 /* MultiBankGroupTaskTests */,
+			);
+			name = MultiBankGroupTaskTests;
+			packageProductDependencies = (
+			);
+			productName = MultiBankGroupTaskTests;
+			productReference = 014814892F50EA5E00F4CE39 /* MultiBankGroupTaskTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		017171122F50726900940940 /* MultiBankGroupTask */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0171711E2F50726A00940940 /* Build configuration list for PBXNativeTarget "MultiBankGroupTask" */;
@@ -93,6 +141,10 @@
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					014814882F50EA5E00F4CE39 = {
+						CreatedOnToolsVersion = 26.1;
+						TestTargetID = 017171122F50726900940940;
+					};
 					017171122F50726900940940 = {
 						CreatedOnToolsVersion = 26.1;
 					};
@@ -113,11 +165,19 @@
 			projectRoot = "";
 			targets = (
 				017171122F50726900940940 /* MultiBankGroupTask */,
+				014814882F50EA5E00F4CE39 /* MultiBankGroupTaskTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		014814872F50EA5E00F4CE39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		017171112F50726900940940 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +188,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		014814852F50EA5E00F4CE39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0171710F2F50726900940940 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +204,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0148148E2F50EA5E00F4CE39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 017171122F50726900940940 /* MultiBankGroupTask */;
+			targetProxy = 0148148D2F50EA5E00F4CE39 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		014814902F50EA5E00F4CE39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.nnickspr.MultiBankGroupTaskTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiBankGroupTask.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MultiBankGroupTask";
+			};
+			name = Debug;
+		};
+		014814912F50EA5E00F4CE39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.nnickspr.MultiBankGroupTaskTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiBankGroupTask.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MultiBankGroupTask";
+			};
+			name = Release;
+		};
 		0171711C2F50726A00940940 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -334,6 +451,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0148148F2F50EA5E00F4CE39 /* Build configuration list for PBXNativeTarget "MultiBankGroupTaskTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				014814902F50EA5E00F4CE39 /* Debug */,
+				014814912F50EA5E00F4CE39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0171710E2F50726900940940 /* Build configuration list for PBXProject "MultiBankGroupTask" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
