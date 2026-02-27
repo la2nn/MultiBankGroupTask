@@ -59,12 +59,11 @@ private extension StockRowView {
         .padding(.vertical, 6)
         .background(
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(symbol.priceColor.opacity(isFlashing ? 0.12 : 0))
+                .fill(symbol.flashColor.opacity(isFlashing ? 0.12 : 0))
         )
     }
 
     func triggerFlash() {
-        guard symbol.priceDirection != .none else { return }
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
             isFlashing = true
         }

@@ -24,6 +24,14 @@ extension StockSymbol {
         }
     }
 
+    var flashColor: Color {
+        switch priceDirection {
+        case .up: .green
+        case .down: .red
+        case .none: .clear
+        }
+    }
+
     var priceIndicatorColor: Color {
         switch priceDirection {
         case .up: .green
