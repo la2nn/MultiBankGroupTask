@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		01BC05162F51934400E3BACF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01BC05152F51934400E3BACF /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		0148148D2F50EA5E00F4CE39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19,6 +23,7 @@
 /* Begin PBXFileReference section */
 		014814892F50EA5E00F4CE39 /* MultiBankGroupTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiBankGroupTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		017171132F50726900940940 /* MultiBankGroupTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiBankGroupTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01BC05152F51934400E3BACF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -68,6 +73,7 @@
 		0171710A2F50726900940940 = {
 			isa = PBXGroup;
 			children = (
+				01BC05152F51934400E3BACF /* README.md */,
 				017171152F50726900940940 /* MultiBankGroupTask */,
 				0148148A2F50EA5E00F4CE39 /* MultiBankGroupTaskTests */,
 				017171142F50726900940940 /* Products */,
@@ -182,6 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01BC05162F51934400E3BACF /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
